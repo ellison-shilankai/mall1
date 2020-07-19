@@ -70,8 +70,27 @@
       this.getHomeGoods('new')
       this.getHomeGoods('sell')
     },
+    mounted () {
+       //3.监听item中图片加载完成
+       const refresh = this.debounce(this.$refs.scroll.refresh, 200)
+      this.$bus.$on('itemImageLoad', () => {
+        // console.log('----');
+        // this.$refs.scroll.refresh()
+        refresh();
+      })
+    },
     methods: {
       //事件监听
+      debounce(func, delay) {
+        let timer = null;
+        return function(...args) {
+          if(timer) clearInterval(timer)
+          timer = setTimeout(() => {
+            func.apply(this, args)
+          }, delay)
+        }
+      },
+
       tabClick(index) {
         switch(index) {
           case 0:

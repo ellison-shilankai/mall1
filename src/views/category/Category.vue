@@ -896,11 +896,4 @@
     overflow: hidden;
     /*overflow-y: scroll;*/
   }
-  .wrapper1 {
-    height: 150px;
-    background-color: red;
-
-    overflow: hidden;
-    /*overflow-y: scroll;*/
-  }
 </style>
