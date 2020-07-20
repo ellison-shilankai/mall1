@@ -6,11 +6,11 @@
             :probe-type="3" @scroll="contentScroll"
             :pull-up-load="true"
             @pullingUp="loadMore">
-      <home-swiper :banners="banners" />
+      <home-swiper :banners="banners" 
+      @swiperImageLoad="swiperImageLoad"/>
       <recommend-view :recommends="recommends"/>
       <feature-view/>
-      <tab-control class="tab-control"
-                   :titles="['流行','新款','样品']"
+      <tab-control :titles="['流行','新款','样品']"
                    @tabClick="tabClick"/>
 
       <goods-list :goods="showGoods "/>
@@ -32,6 +32,7 @@
   import BackTop from 'components/content/backTop/BackTop'
 
   import { getHomeMultidata, getHomeGoods } from "network/home";
+  import { debounce } from "components/common/utils";
   export default {
     name: "Home",
     components: {
@@ -72,7 +73,7 @@
     },
     mounted () {
        //3.监听item中图片加载完成
-       const refresh = this.debounce(this.$refs.scroll.refresh, 200)
+       const refresh = debounce(this.$refs.scroll.refresh, 200)
       this.$bus.$on('itemImageLoad', () => {
         // console.log('----');
         // this.$refs.scroll.refresh()
@@ -80,17 +81,6 @@
       })
     },
     methods: {
-      //事件监听
-      debounce(func, delay) {
-        let timer = null;
-        return function(...args) {
-          if(timer) clearInterval(timer)
-          timer = setTimeout(() => {
-            func.apply(this, args)
-          }, delay)
-        }
-      },
-
       tabClick(index) {
         switch(index) {
           case 0:
@@ -113,6 +103,11 @@
       loadMore() {
         this.getHomeGoods(this.currentType)
       },
+
+      swiperImageLoad() {
+        console.log(this.$refs.tabControl)
+        // this.tabOffsetTop = this.$refs.tabControl.$el.offsetTop;
+      },
       //网络请求
       getHomeMultidata() {
         getHomeMultidata().then(res => {
@@ -127,6 +122,8 @@
           // console.log(res);
           this.goods[type].list.push(...res.data.list)
           this.goods[type].page += 1
+          //完成上拉加载更多
+          this.$refs.scroll.finishPullUp();
         })
       }
     }
@@ -148,11 +145,11 @@
     top: 0;
     z-index: 9;
   }
-  .tab-control {
+  /* .tab-control {
     position: sticky;
     top: 44px;
     z-index: 9;
-  }
+  } */
   .content {
     overflow: hidden;
     position: absolute;

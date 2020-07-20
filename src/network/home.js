@@ -14,5 +14,3 @@ export  function  getHomeGoods(type, page) {
     }
   })
 }
-//const totalNums = []
-//const  nums = [20,11,222 ]
