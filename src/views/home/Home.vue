@@ -64,7 +64,8 @@
         isShowBackTop: false,
         tabOffsetTop: 0,
         isTabfixed: false,
-        fixed: "fixed"
+        fixed: "fixed",
+        saveY: 0
       }
     },
     computed: {
@@ -79,6 +80,13 @@
       this.getHomeGoods('pop')
       this.getHomeGoods('new')
       this.getHomeGoods('sell')
+    },
+    activated() {
+      this.$refs.scroll.scrollTo(0, this.saveY, 0.1);
+      this.$refs.scroll.refresh();
+    },
+    deactivated () {
+      this.saveY = this.$refs.scroll.getScrollY();
     },
     mounted () {
        //3.监听item中图片加载完成
