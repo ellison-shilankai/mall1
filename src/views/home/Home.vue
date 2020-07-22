@@ -3,20 +3,20 @@
     <nav-bar class="home-nav"><div slot="center">购物街</div></nav-bar>
     <tab-control :titles="['流行','新款','样品']"
                    @tabClick="tabClick"
-                   ref="tabControl1" 
-                   :class="fixed" 
+                   ref="tabControl1"
+                   :class="fixed"
                    v-show="isTabfixed"/>
     <scroll class="content" ref="scroll"
             :probe-type="3" @scroll="contentScroll"
             :pull-up-load="true"
             @pullingUp="loadMore">
-      <home-swiper :banners="banners" 
+      <home-swiper :banners="banners"
       @swiperImageLoad="swiperImageLoad"/>
       <recommend-view :recommends="recommends"/>
       <feature-view/>
       <tab-control :titles="['流行','新款','样品']"
                    @tabClick="tabClick"
-                   ref="tabControl2" 
+                   ref="tabControl2"
                    :class="{fixed: isTabfixed}"/>
 
       <goods-list :goods="showGoods "/>
@@ -37,6 +37,7 @@
   import Scroll from 'components/common/scroll/Scroll'
   import BackTop from 'components/content/backTop/BackTop'
 
+  import { itemListenerMixin } from "components/common/mixin";
   import { getHomeMultidata, getHomeGoods } from "network/home";
   import { debounce } from "components/common/utils";
   export default {
@@ -51,6 +52,7 @@
       Scroll,
       BackTop
     },
+    mixins: [itemListenerMixin],
     data() {
       return {
         banners: [],
@@ -90,10 +92,10 @@
     },
     mounted () {
        //3.监听item中图片加载完成
-       const refresh = debounce(this.$refs.scroll.refresh, 200)
-      this.$bus.$on('itemImageLoad', () => {
-        refresh();
-      })
+      //  const refresh = debounce(this.$refs.scroll.refresh, 200)
+      // this.$bus.$on('itemImageLoad', () => {
+      //   refresh();
+      // })
     },
     methods: {
       tabClick(index) {
