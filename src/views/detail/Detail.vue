@@ -1,7 +1,7 @@
 <template>
   <div id="detail">
     <detail-nav-bar class="detail-nav" @titleClick="titleClick" />
-    <scroll class="content" ref="scroll">
+    <scroll class="content" ref="scroll" @content="contentScroll">
       <detail-swiper :top-images="topImages" />
       <detail-base-info :goods="goods" />
       <detail-shop-info :shop="shop" />
@@ -33,7 +33,7 @@ import {
   Goods,
   Shop,
   GoodsParam,
-  getRecommend
+  getRecommend,
 } from "network/detail";
 export default {
   name: "Detail",
@@ -48,7 +48,7 @@ export default {
     // DetailRecommendInfo,
     // DetailBottomBar,
     GoodsList,
-    Scroll
+    Scroll,
   },
   mixins: [itemListenerMixin],
   data() {
@@ -62,14 +62,14 @@ export default {
       commentInfo: {},
       recommends: [],
       themeTopYs: [],
-      getThemeTopY: null
+      getThemeTopY: null,
     };
   },
   created() {
     // 1.保存传入的iid
     this.iid = this.$route.params.iid;
     // 2.根据iid请求详情数据
-    getDetail(this.iid).then(res => {
+    getDetail(this.iid).then((res) => {
       console.log(res);
       const data = res.result;
       // 1.获取顶部的图片轮播数据
@@ -105,7 +105,7 @@ export default {
     });
 
     // 3.请求推荐数据
-    getRecommend().then(res => {
+    getRecommend().then((res) => {
       console.log(res);
       const data = res.result;
       this.recommends = res.data.list;
@@ -141,9 +141,24 @@ export default {
       // console.log(index);
       // console.log(this.themeTopYs[index])
       this.$refs.scroll.scrollTo(0, -this.themeTopYs[index], 100);
+<<<<<<< HEAD
+      console.log(this.themeTopYs[index]);
+    },
+    contentScroll(position) {
+      // 1.获取y值
+      const postionY = -position;
+
+      // 2.positionY和主题值对比
+      for (let i in this.themeTopYs) {
+        console.log(i);
+      }
+    },
+  },
+=======
       // console.log(this.themeTopYs[index]);
     }
   }
+>>>>>>> 9fdd68be0c7d4c2e7aa6402fd26685bf17211f72
 };
 </script>
 
