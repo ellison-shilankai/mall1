@@ -94,14 +94,14 @@ export default {
         this.commentInfo = data.rate.list[0];
       }
       // 可能值不对，因为图片可能没有加载完全
-      this.$nextTick(() => {
-        // this.themeTopYs = [];
-        // this.themeTopYs.push(0);
-        // this.themeTopYs.push(this.$refs.param.$el.offsetTop);
-        // this.themeTopYs.push(this.$refs.comment.$el.offsetTop);
-        // this.themeTopYs.push(this.$refs.recommend.$el.offsetTop);
-        // console.log(this.themeTopYs);
-      });
+      // this.$nextTick(() => {
+      //   this.themeTopYs = [];
+      //   this.themeTopYs.push(0);
+      //   this.themeTopYs.push(this.$refs.param.$el.offsetTop);
+      //   this.themeTopYs.push(this.$refs.comment.$el.offsetTop);
+      //   this.themeTopYs.push(this.$refs.recommend.$el.offsetTop);
+      //   console.log(this.themeTopYs);
+      // });
     });
 
     // 3.请求推荐数据
@@ -112,13 +112,13 @@ export default {
     });
     // 4.给getThemeTopY赋值
     this.getThemeTopY = debounce(() => {
-      console.log(this.themeTopYs);
+      // console.log(this.themeTopYs);
       this.themeTopYs = [];
       this.themeTopYs.push(0);
-      this.themeTopYs.push(this.$refs.param.$el.offsetTop);
-      this.themeTopYs.push(this.$refs.comment.$el.offsetTop);
-      this.themeTopYs.push(this.$refs.recommend.$el.offsetTop);
-      console.log(this.themeTopYs);
+      this.themeTopYs.push(this.$refs.param.$el.offsetTop-44);
+      this.themeTopYs.push(this.$refs.comment.$el.offsetTop-44);
+      this.themeTopYs.push(this.$refs.recommend.$el.offsetTop-44);
+      // console.log(this.themeTopYs);
     }, 100);
   },
   mounted() {
@@ -133,15 +133,15 @@ export default {
   },
   methods: {
     imageLoad() {
-      this.newRefresh();
-      // this．$refs.scroll.refresh();
+      // this.newRefresh();
+      this.$refs.scroll.refresh();
       this.getThemeTopY();
     },
     titleClick(index) {
-      console.log(index);
+      // console.log(index);
       // console.log(this.themeTopYs[index])
       this.$refs.scroll.scrollTo(0, -this.themeTopYs[index], 100);
-      console.log(this.themeTopYs[index]);
+      // console.log(this.themeTopYs[index]);
     }
   }
 };
