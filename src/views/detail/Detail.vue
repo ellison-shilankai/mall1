@@ -1,7 +1,7 @@
 <template>
   <div id="detail">
-    <detail-nav-bar class="detail-nav" @titleClick="titleClick" />
-    <scroll class="content" ref="scroll" @content="contentScroll">
+    <detail-nav-bar class="detail-nav" @titleClick="titleClick" ref="nav"/>
+    <scroll class="content" ref="scroll" :probe-type="3" @scroll="contentScroll">
       <detail-swiper :top-images="topImages" />
       <detail-base-info :goods="goods" />
       <detail-shop-info :shop="shop" />
@@ -63,6 +63,7 @@ export default {
       recommends: [],
       themeTopYs: [],
       getThemeTopY: null,
+      currentIndex: 0,
     };
   },
   created() {
@@ -115,9 +116,9 @@ export default {
       // console.log(this.themeTopYs);
       this.themeTopYs = [];
       this.themeTopYs.push(0);
-      this.themeTopYs.push(this.$refs.param.$el.offsetTop-44);
-      this.themeTopYs.push(this.$refs.comment.$el.offsetTop-44);
-      this.themeTopYs.push(this.$refs.recommend.$el.offsetTop-44);
+      this.themeTopYs.push(this.$refs.param.$el.offsetTop - 44);
+      this.themeTopYs.push(this.$refs.comment.$el.offsetTop - 44);
+      this.themeTopYs.push(this.$refs.recommend.$el.offsetTop - 44);
       // console.log(this.themeTopYs);
     }, 100);
   },
@@ -141,24 +142,27 @@ export default {
       // console.log(index);
       // console.log(this.themeTopYs[index])
       this.$refs.scroll.scrollTo(0, -this.themeTopYs[index], 100);
-<<<<<<< HEAD
-      console.log(this.themeTopYs[index]);
+      // console.log(this.themeTopYs[index]);
     },
     contentScroll(position) {
       // 1.获取y值
-      const postionY = -position;
-
+      const positionY = -position.y;
+      let length = this.themeTopYs.length;
       // 2.positionY和主题值对比
-      for (let i in this.themeTopYs) {
-        console.log(i);
+      for (let i = 0; i < length; i++) {
+        if (
+          this.currentIndex !== i &&
+          ((i < length-1 && positionY >= this.themeTopYs[i] &&
+           positionY < this.themeTopYs[i + 1]) ||
+            (i === length - 1 && positionY >= this.themeTopYs[i]))
+        ) {
+          this.currentIndex = i;
+        }
       }
+     
+      // this.$refs.nav.currentIndex = this.currentIndex;
     },
   },
-=======
-      // console.log(this.themeTopYs[index]);
-    }
-  }
->>>>>>> 9fdd68be0c7d4c2e7aa6402fd26685bf17211f72
 };
 </script>
 
