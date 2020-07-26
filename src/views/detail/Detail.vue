@@ -112,13 +112,13 @@ export default {
     });
     // 4.给getThemeTopY赋值
     this.getThemeTopY = debounce(() => {
-      console.log(this.themeTopYs);
+      // console.log(this.themeTopYs);
       this.themeTopYs = [];
       this.themeTopYs.push(0);
-      this.themeTopYs.push(this.$refs.param.$el.offsetTop);
-      this.themeTopYs.push(this.$refs.comment.$el.offsetTop);
-      this.themeTopYs.push(this.$refs.recommend.$el.offsetTop);
-      console.log(this.themeTopYs);
+      this.themeTopYs.push(this.$refs.param.$el.offsetTop-44);
+      this.themeTopYs.push(this.$refs.comment.$el.offsetTop-44);
+      this.themeTopYs.push(this.$refs.recommend.$el.offsetTop-44);
+      // console.log(this.themeTopYs);
     }, 100);
   },
   mounted() {
@@ -133,14 +133,15 @@ export default {
   },
   methods: {
     imageLoad() {
-      this.newRefresh();
-      // this．$refs.scroll.refresh();
+      // this.newRefresh();
+      this.$refs.scroll.refresh();
       this.getThemeTopY();
     },
     titleClick(index) {
-      console.log(index);
+      // console.log(index);
       // console.log(this.themeTopYs[index])
       this.$refs.scroll.scrollTo(0, -this.themeTopYs[index], 100);
+<<<<<<< HEAD
       console.log(this.themeTopYs[index]);
     },
     contentScroll(position) {
@@ -153,6 +154,11 @@ export default {
       }
     },
   },
+=======
+      // console.log(this.themeTopYs[index]);
+    }
+  }
+>>>>>>> 9fdd68be0c7d4c2e7aa6402fd26685bf17211f72
 };
 </script>
 
