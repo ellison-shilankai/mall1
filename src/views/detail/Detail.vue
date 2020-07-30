@@ -149,6 +149,7 @@ export default {
       const positionY = -position.y;
       let length = this.themeTopYs.length;
       // 2.positionY和主题值对比
+      // 第二种方法就是在数组里传入一个超大的值Number.MAX_VALUE
       for (let i = 0; i < length; i++) {
         if (
           this.currentIndex !== i &&
