@@ -10,6 +10,8 @@
       <detail-comment-info ref="comment" :comment-info="commentInfo" />
       <goods-list ref="recommend" :goods="recommends" />
     </scroll>
+    <detail-bottom-bar @addCart="addToCart"/>
+    <back-top @click.native="backTop" v-show="isShowBackTop"/>
   </div>
 </template>
 
@@ -22,12 +24,13 @@ import DetailGoodsInfo from "./childComps/DetailGoodsInfo";
 import DetailParamInfo from "./childComps/DetailParamInfo";
 import DetailCommentInfo from "./childComps/DetailCommentInfo";
 // import DetailRecommendInfo from "./childComps/DetailRecommendInfo"
-// import DetailBottomBar from "./childComps/DetailBottomBar"
+import DetailBottomBar from "./childComps/DetailBottomBar"
+// import BackTop from 'components/content/backTop/BackTop'
 
 import GoodsList from "components/content/goods/GoodsList";
 import Scroll from "components/common/scroll/Scroll";
 import { debounce } from "components/common/utils";
-import { itemListenerMixin } from "components/common/mixin";
+import { itemListenerMixin, backTopMixin } from "components/common/mixin";
 import {
   getDetail,
   Goods,
@@ -46,11 +49,12 @@ export default {
     DetailParamInfo,
     DetailCommentInfo,
     // DetailRecommendInfo,
-    // DetailBottomBar,
+    DetailBottomBar,
     GoodsList,
     Scroll,
+    // BackTop
   },
-  mixins: [itemListenerMixin],
+  mixins: [itemListenerMixin, backTopMixin ],
   data() {
     return {
       iid: null,
@@ -64,6 +68,7 @@ export default {
       themeTopYs: [],
       getThemeTopY: null,
       currentIndex: 0,
+      // isShowBackTop: false,
     };
   },
   created() {
@@ -159,9 +164,24 @@ export default {
           this.currentIndex = i;
         }
       }
-     
-      // this.$refs.nav.currentIndex = this.currentIndex;
+      this.$refs.nav.currentIndex = this.currentIndex;
+      // 3. 是否显示回到顶部按钮
+      this.isShowBackTop = (-position.y) > 1000
     },
+    // backClick() {
+    //   this.$refs.scroll.scrollTo(0 ,0);
+    // },
+    addToCart() {
+      // 1.获取购物车需要展示的信息
+      const product = {}
+      product.image = this.topImages[0];
+      product.title = this.goodsinfo.title;
+      product.desc = this.goodsInfo.desc;
+      product.price = this.goodsInfo.realPrice;
+      product.iid = this.iid;
+      //2. 将商品添加到购物车里
+
+    }
   },
 };
 </script>
@@ -179,6 +199,6 @@ export default {
   background-color: #fff;
 }
 .content {
-  height: calc(100% - 44px);
+  height: calc(100% - 44px - 58px);
 }
 </style>
