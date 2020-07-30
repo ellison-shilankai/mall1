@@ -10,7 +10,7 @@
       <detail-comment-info ref="comment" :comment-info="commentInfo" />
       <goods-list ref="recommend" :goods="recommends" />
     </scroll>
-    <detail-bottom-bar/>
+    <detail-bottom-bar @addCart="addToCart"/>
     <back-top @click.native="backTop" v-show="isShowBackTop"/>
   </div>
 </template>
@@ -171,6 +171,17 @@ export default {
     // backClick() {
     //   this.$refs.scroll.scrollTo(0 ,0);
     // },
+    addToCart() {
+      // 1.获取购物车需要展示的信息
+      const product = {}
+      product.image = this.topImages[0];
+      product.title = this.goodsinfo.title;
+      product.desc = this.goodsInfo.desc;
+      product.price = this.goodsInfo.realPrice;
+      product.iid = this.iid;
+      //2. 将商品添加到购物车里
+
+    }
   },
 };
 </script>
