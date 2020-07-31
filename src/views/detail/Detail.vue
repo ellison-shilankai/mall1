@@ -1,7 +1,14 @@
 <template>
   <div id="detail">
     <detail-nav-bar class="detail-nav" @titleClick="titleClick" ref="nav"/>
+    <div>{{ $store.state.cartList.length}}</div>
+    <ul>
+        <li v-for="item in $store.state.cartList" :key ="item.id">
+          {{item}}
+        </li>
+      </ul>
     <scroll class="content" ref="scroll" :probe-type="3" @scroll="contentScroll">
+
       <detail-swiper :top-images="topImages" />
       <detail-base-info :goods="goods" />
       <detail-shop-info :shop="shop" />
@@ -9,6 +16,8 @@
       <detail-param-info ref="param" :param-info="paramInfo" />
       <detail-comment-info ref="comment" :comment-info="commentInfo" />
       <goods-list ref="recommend" :goods="recommends" />
+
+
     </scroll>
     <detail-bottom-bar @addCart="addToCart"/>
     <back-top @click.native="backTop" v-show="isShowBackTop"/>
@@ -176,12 +185,14 @@ export default {
       // 1.获取购物车需要展示的信息
       const product = {}
       product.image = this.topImages[0];
-      product.title = this.goodsinfo.title;
-      product.desc = this.goodsInfo.desc;
-      product.price = this.goodsInfo.realPrice;
+      product.title = this.goods.title;
+      product.desc = this.goods.desc;
+      product.price = this.goods.realPrice;
       product.iid = this.iid;
       //2. 将商品添加到购物车里
-
+      // this.$store.cartList.push(product)
+      // this.$store.commit('addCart', product);
+      this.$store.dispatch('addCart', product);
     }
   },
 };
