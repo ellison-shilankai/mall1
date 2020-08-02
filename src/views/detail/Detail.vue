@@ -1,12 +1,12 @@
 <template>
   <div id="detail">
     <detail-nav-bar class="detail-nav" @titleClick="titleClick" ref="nav"/>
-    <div>{{ $store.state.cartList.length}}</div>
-    <ul>
+    <!-- <div>{{ $store.state.cartList.length}}</div> -->
+    <!-- <ul>
         <li v-for="item in $store.state.cartList" :key ="item.id">
           {{item}}
         </li>
-      </ul>
+      </ul> -->
     <scroll class="content" ref="scroll" :probe-type="3" @scroll="contentScroll">
 
       <detail-swiper :top-images="topImages" />
