@@ -1,7 +1,9 @@
 import {
   ADD_COUNTER,
-  ADD_TO_CART
+  ADD_TO_CART,
+  CHANGE_TESTBOOLEAN,
 } from './mutaion-types'
+// import * as types from '@/store/mutation-types';
 export default {
   addCart(context, payload) {
     // payload新添加商品
@@ -21,5 +23,11 @@ export default {
       // context.state.cartList.push(payload);
       context.commit(ADD_TO_CART, payload)
     }
+  },
+  changeStatus(context, payload){
+    context.commit(CHANGE_TESTBOOLEAN, payload)
   }
 }
+// export const changeStatus = ({ commit }, { isLoading }) => {
+//   commit(CHANGE_TESTBOOLEAN, { isLoading });
+// };

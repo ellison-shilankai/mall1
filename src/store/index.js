@@ -11,7 +11,9 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
   state: {
-    cartList: []
+    cartList: [],
+    testBoolean: true,
+    testObj:{naem: 'ellison'}
   },
   mutations,
     // mutations唯一的目的就是修改state中状态
@@ -34,7 +36,7 @@ const store = new Vuex.Store({
     //   }
     //   state.cartList.push(payload)
     // }
-  
+
   actions,
   getters
 })
