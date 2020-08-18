@@ -35,6 +35,10 @@ export default {
     this.obj2 = this.clone(this.obj1);
     this.obj3 = this.deepClone(this.obj1);
     this.obj1.name = "小红";
+
+    this.$bus.$on("event1", function(aaa) {
+      console.log(aaa);
+    });
   },
   methods: {
     ...mapActions(["changeStatus"]),
