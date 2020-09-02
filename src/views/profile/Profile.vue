@@ -7,6 +7,19 @@
       {{obj1.name}}
       {{obj2}}
     </scroll>
+    <van-button color="#7232dd">单色按钮</van-button>
+    <van-button color="#7232dd" plain>单色按钮</van-button>
+    <van-button color="linear-gradient(to right, #ff6034, #ee0a24)">渐变色按钮</van-button>
+    <van-button type="primary" size="large">大号按钮</van-button>
+    <van-button type="primary" size="normal">普通按钮</van-button>
+    <van-button type="primary" size="small">小型按钮</van-button>
+    <van-button type="primary" size="mini">迷你按钮</van-button>
+    <van-cell-group title="分组1">
+      <van-cell title="单元格" value="内容" />
+    </van-cell-group>
+    <van-cell-group title="分组2">
+      <van-cell title="单元格" value="内容" />
+    </van-cell-group>
   </div>
 </template>
 
@@ -27,7 +40,8 @@ export default {
       obj2: {},
       obj3: {},
       arr: [5, 3, 2, 7, 10],
-      arr1: []
+      arr1: [],
+      str: "aweoifdjmaiofcja"
     };
   },
   computed: {
@@ -45,6 +59,7 @@ export default {
     this.$bus.$on("event1", function(aaa) {
       console.log(aaa);
     });
+    console.log(this.select(this.str));
   },
   methods: {
     ...mapActions(["changeStatus"]),
@@ -74,6 +89,23 @@ export default {
       }
       //递归执行以上操作,对左右两个数组进行操作，直到数组长度为<=1；
       return this.quickSort(left).concat([pivot], this.quickSort(right));
+    },
+    select(str) {
+      var obj = {};
+      var obj2 = {};
+      var arr = str.split("");
+      var max = 1;
+      for (let i = 0; i < arr.length; i++) {
+        var item = arr[i];
+        obj[item] = obj[item] + 1 || 1;
+      }
+      for (var key in obj) {
+        if (obj[key] > max) max = key;
+      }
+      for (var key in obj) {
+        if (obj[key] === max) obj2[key] = max;
+      }
+      return obj2;
     }
   }
 };
