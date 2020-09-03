@@ -229,7 +229,7 @@
         <li>分类列表226</li>
         <li>分类列表227</li>
         <li>分类列表228</li>
- 
+
         <li>分类列表249</li>
         <li>分类列表250</li>
         <li>分类列表251</li>
@@ -819,34 +819,6 @@
         <li>分类列表835</li>
         <li>分类列表836</li>
         <li>分类列表837</li>
-        <li>分类列表838</li>
-        <li>分类列表839</li>
-        <li>分类列表840</li>
-        <li>分类列表841</li>
-        <li>分类列表842</li>
-        <li>分类列表843</li>
-        <li>分类列表844</li>
-        <li>分类列表845</li>
-        <li>分类列表846</li>
-        <li>分类列表847</li>
-        <li>分类列表848</li>
-        <li>分类列表849</li>
-        <li>分类列表850</li>
-        <li>分类列表851</li>
-        <li>分类列表852</li>
-        <li>分类列表853</li>
-        <li>分类列表854</li>
-        <li>分类列表855</li>
-        <li>分类列表856</li>
-        <li>分类列表857</li>
-        <li>分类列表858</li>
-        <li>分类列表859</li>
-        <li>分类列表860</li>
-        <li>分类列表861</li>
-        <li>分类列表862</li>
-        <li>分类列表863</li>
-        <li>分类列表864</li>
-        <li>分类列表865</li>
       </ul>
     </div>
   </div>
@@ -879,10 +851,12 @@
     methods: {
       btnClick() {
         console.log('btnClick');
+        this.$bus.$emit("event1","somethings from helloworld");
       },
       divClick() {
         console.log('divClick');
       }
+
     }
   }
 

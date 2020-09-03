@@ -26,7 +26,7 @@
 		name: "DetailBottomBar",
     methods: {
       addToCart() {
-        this.$emit('addToCart')
+        this.$emit('addCart')
       }
     }
 	}
@@ -42,6 +42,8 @@
     bottom: 0;
     display: flex;
     text-align: center;
+    /* position: relative;
+    bottom: 58px; */
   }
   .bar-item {
     flex: 1;
