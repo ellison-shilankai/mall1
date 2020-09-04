@@ -1,0 +1,16 @@
+.e-empty{
+  display:flex;
+  flex-direction: column;
+  justify-content:center;
+  align-items: center;
+}
+.e-empty__img{
+  width: 34%!important;
+}
+.e-empty__text{
+  font-weight:500;
+  margin-top: rem(16);
+  font-size: rem(17);
+  text-align: center;
+  color: $primary-color;
+}

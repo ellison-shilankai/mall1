@@ -39,7 +39,7 @@ import DetailBottomBar from "./childComps/DetailBottomBar"
 
 import GoodsList from "components/content/goods/GoodsList";
 import Scroll from "components/common/scroll/Scroll";
-// import Toast from "components/common/toast/Toast";
+import Toast from "components/common/toast/Toast";
 
 import { debounce } from "components/common/utils";
 import { itemListenerMixin, backTopMixin } from "components/common/mixin";
@@ -64,7 +64,7 @@ export default {
     DetailBottomBar,
     GoodsList,
     Scroll,
-    // Toast,
+    Toast,
     // BackTop
   },
   mixins: [itemListenerMixin, backTopMixin ],
@@ -209,7 +209,7 @@ export default {
         //   this.message = '';
         // },1500)
         // console.log(this.$toast)
-        this.$toast.show();
+        that.show;
       })
       // this.$store.dispatch('addCart', product);
     }

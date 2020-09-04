@@ -7,11 +7,11 @@ const Category = () => import('../views/category/Category');
 const Cart = () => import('../views/cart/Cart');
 const Profile = () => import('../views/profile/Profile')
 const Detail = () => import('../views/detail/Detail.vue')
+// const My = () => import('../views/my/My.vue')
 //1.安装插件
 Vue.use(VueRouter)
 //2.创建router
-const routes = [
-  {
+const routes = [{
     path: '',
     redirect: '/home'
   },
@@ -34,11 +34,21 @@ const routes = [
   {
     path: '/detail/:iid',
     component: Detail
-  }
+  },
+  {
+    path: '/my',
+    component: () =>
+      import("@/views/my/index.vue")
+  },
+  {
+    path: '/my/details',
+    component: () =>
+      import("@/views/my/my-details/index.vue")
+  },
 ]
-const router =new VueRouter({
+const router = new VueRouter({
   routes,
   mode: 'history'
 })
 
-export  default  router
+export default router

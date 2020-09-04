@@ -1,0 +1,10 @@
+@import './variables.scss';
+@import './mixins.scss';
+@import './global.scss';
+
+//components
+@import "./components/empty/e-empty.scss";
+//views
+@import "./views/my/index.scss";
+@import "./views/my/my-details/index.scss";
+
